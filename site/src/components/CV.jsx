@@ -1,3 +1,4 @@
+import { siteUrl } from "../site-url.js";
 import { cv, experience } from "../cv-data.js";
 
 export default function CV() {
@@ -6,8 +7,8 @@ export default function CV() {
       <div className="starfield" aria-hidden="true" />
       <a className="skip-link" href="#cv">Skip to CV</a>
       <nav className="cv-toolbar" aria-label="CV actions">
-        <a href="/"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <a className="cv-download" href="/Jordan-Haigh-CV.pdf" download="Jordan-Haigh-CV.pdf">Download PDF <span aria-hidden="true">↓</span></a>
+        <a href={siteUrl("")}><span aria-hidden="true">←</span> Back to portfolio</a>
+        <a className="cv-download" href={siteUrl("Jordan-Haigh-CV.pdf")} download="Jordan-Haigh-CV.pdf">Download PDF <span aria-hidden="true">↓</span></a>
       </nav>
       <main id="cv" className="cv-paper">
         <header className="cv-header">
@@ -67,7 +68,7 @@ export default function CV() {
           </div>
         </div>
       </main>
-      <footer className="cv-footer"><a href="/">Jordan Haigh · Back to portfolio <span aria-hidden="true">↗</span></a></footer>
+      <footer className="cv-footer"><a href={siteUrl("")}>Jordan Haigh · Back to portfolio <span aria-hidden="true">↗</span></a></footer>
     </div>
   );
 }

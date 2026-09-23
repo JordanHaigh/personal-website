@@ -1,3 +1,4 @@
+import { siteUrl } from "../site-url.js";
 import { useEffect, useRef } from "react";
 import { startParticles } from "../particles.js";
 
@@ -19,7 +20,7 @@ export default function Hero() {
         <p className="hero-role">TECHNICAL LEAD <span aria-hidden="true">/</span> SENIOR ENGINEER</p>
         <a className="hero-button" href="#projects">View my work <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-7-7 7 7 7-7"/></svg></a>
       </div>
-      <div className="hero-bottom"><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><a className="hero-cv-link" href="/cv.html">CV / 2026 <span aria-hidden="true">↗</span></a></div>
+      <div className="hero-bottom"><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><a className="hero-cv-link" href={siteUrl("cv.html")}>CV / 2026 <span aria-hidden="true">↗</span></a></div>
     </header>
   );
 }

@@ -69,7 +69,7 @@ Toolkit logos come from [Devicon](https://github.com/devicons/devicon) and the o
 
 The workflow uses GitHub's built-in token and the `github-pages` environment. It needs no manually created token, secret or environment variable. The previous `production` environment and AWS variables are not used.
 
-The `CNAME` file is copied into the build, but **custom Actions deployments require the domain to be configured in Pages settings**; that file alone does not configure the domain. Assets use root-relative paths for `https://jordanhaigh.dev/`, so the temporary `github.io/personal-website/` address is not the intended preview URL. See [GitHub's custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) and [publishing-source settings](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+The `CNAME` file is copied into the build, but **custom Actions deployments require the domain to be configured in Pages settings**; that file alone does not configure the domain. The workflow reads the site path from GitHub Pages and passes it to Vite as `SITE_BASE_PATH`. Assets, local navigation and the PDF download work at both `https://jordanhaigh.github.io/personal-website/` and the custom-domain root. After adding or removing the custom domain in Pages settings, run the workflow again to rebuild for the new path. See [GitHub's custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) and [publishing-source settings](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ### 2. Configure DNS in Squarespace
 
@@ -108,6 +108,12 @@ Wait for the DNS check to pass in **Settings → Pages**, then select **Enforce 
 5. After the workflow succeeds and DNS is ready, check [the website](https://jordanhaigh.dev/), [the HTML CV](https://jordanhaigh.dev/cv.html), and [the PDF download](https://jordanhaigh.dev/Jordan-Haigh-CV.pdf).
 
 Pushes and pull requests do not trigger deployment. To roll back, revert the relevant commit, push, and manually run the workflow again.
+
+### If the page is blank and assets return 404
+
+A project Pages URL uses `/personal-website/`, whereas the custom domain uses `/`. The workflow obtains this path from `configure-pages` before building. Commit and push any path fixes, then start a **new workflow run**; rerunning an older run uses its old commit. The browser's Permissions-Policy warning is separate from missing JavaScript/CSS files.
+
+To check a project-path build locally, run `SITE_BASE_PATH=/personal-website/ npm run build`, then `SITE_BASE_PATH=/personal-website/ npm run preview` and open `http://localhost:4173/personal-website/`. Normal local development defaults to `/`.
 
 ### If deployment says “Get Pages site failed: Not Found”
 

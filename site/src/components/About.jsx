@@ -1,3 +1,4 @@
+import { siteUrl } from "../site-url.js";
 import ProfilePortrait from "./ProfilePortrait.jsx";
 
 export default function About() {
@@ -18,21 +19,21 @@ export default function About() {
               <p className="bio-copy">I'm a senior full-stack engineer and technical lead. I build maintainable, testable systems with C#, .NET, React, Azure and AWS, working across financial services, SaaS and data platforms.</p>
               <p className="bio-copy">My work spans architecture, hands-on development and technical delivery. I enjoy turning complex requirements into clear solutions, working directly with stakeholders, reviewing code and helping teams build with confidence.</p>
               <p className="bio-copy">I started out in aviation and geospatial technology, and have also taught programming and mentored junior developers. Sharing knowledge is a part of how I work.</p>
-              <a className="text-link" href="/cv.html">View my CV <span aria-hidden="true">→</span></a>
+              <a className="text-link" href={siteUrl("cv.html")}>View my CV <span aria-hidden="true">→</span></a>
             </div>
           </div>
           <div className="skills">
             <p className="eyebrow">MY TOOLKIT</p>
             <div className="skills-grid" aria-label="Core technical skills">
-              <div className="skill"><div className="skill-logo-pair"><img className="skill-logo" src="/assets/logos/csharp.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><img className="skill-logo" src="/assets/logos/dotnet.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /></div><span>C# / .NET</span></div>
-              <div className="skill"><img className="skill-logo" src="/assets/logos/react.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>React</span></div>
-              <div className="skill"><img className="skill-logo" src="/assets/logos/typescript.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>TypeScript</span></div>
-              <div className="skill"><img className="skill-logo" src="/assets/logos/angular.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Angular</span></div>
-              <div className="skill"><img className="skill-logo skill-logo-aws" src="/assets/logos/aws.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>AWS</span></div>
-              <div className="skill"><img className="skill-logo" src="/assets/logos/azure.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Azure</span></div>
-              <div className="skill"><img className="skill-logo" src="/assets/logos/python.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Python</span></div>
-              <div className="skill"><img className="skill-logo" src="/assets/logos/sql-server.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>SQL Server</span></div>
-              <div className="skill"><img className="skill-logo" src="/assets/logos/terraform.svg" alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Terraform</span></div>
+              <div className="skill"><div className="skill-logo-pair"><img className="skill-logo" src={siteUrl("assets/logos/csharp.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><img className="skill-logo" src={siteUrl("assets/logos/dotnet.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /></div><span>C# / .NET</span></div>
+              <div className="skill"><img className="skill-logo" src={siteUrl("assets/logos/react.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>React</span></div>
+              <div className="skill"><img className="skill-logo" src={siteUrl("assets/logos/typescript.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>TypeScript</span></div>
+              <div className="skill"><img className="skill-logo" src={siteUrl("assets/logos/angular.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Angular</span></div>
+              <div className="skill"><img className="skill-logo skill-logo-aws" src={siteUrl("assets/logos/aws.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>AWS</span></div>
+              <div className="skill"><img className="skill-logo" src={siteUrl("assets/logos/azure.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Azure</span></div>
+              <div className="skill"><img className="skill-logo" src={siteUrl("assets/logos/python.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Python</span></div>
+              <div className="skill"><img className="skill-logo" src={siteUrl("assets/logos/sql-server.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>SQL Server</span></div>
+              <div className="skill"><img className="skill-logo" src={siteUrl("assets/logos/terraform.svg")} alt="" width="48" height="48" loading="lazy" decoding="async" /><span>Terraform</span></div>
             </div>
             <p className="section-note">Also working with Java, Spring Boot, GraphQL,<br />MySQL, PostgreSQL, MongoDB, Redis, REST APIs, TDD and CI/CD.</p>
             <div className="leadership-toolkit">
