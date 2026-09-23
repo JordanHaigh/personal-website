@@ -1,0 +1,88 @@
+name: Deploy website
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to AWS
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: ${{ vars.WEBSITE_URL }}
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+      S3_BUCKET: ${{ vars.S3_BUCKET }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+      WEBSITE_URL: ${{ vars.WEBSITE_URL }}
+      AWS_PAGER: ""
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Validate deployment configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in AWS_REGION AWS_ROLE_ARN S3_BUCKET CLOUDFRONT_DISTRIBUTION_ID WEBSITE_URL; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Set $name in the production environment variables. See README.md."
+              exit 1
+            fi
+          done
+          test -s site/index.html
+          test -s site/404.html
+
+      - name: Authenticate with AWS
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: website-${{ github.run_id }}
+
+      - name: Upload website
+        shell: bash
+        run: |
+          set -euo pipefail
+          aws s3 sync site/ "s3://$S3_BUCKET/" \
+            --delete \
+            --cache-control "no-cache" \
+            --only-show-errors
+
+      - name: Refresh CloudFront cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          invalidation_id=$(aws cloudfront create-invalidation \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+            --paths '/*' \
+            --query 'Invalidation.Id' \
+            --output text)
+          aws cloudfront wait invalidation-completed \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+            --id "$invalidation_id"
+
+      - name: Verify website responds
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-delay 10 --retry-all-errors \
+            --connect-timeout 10 --max-time 30 \
+            "$WEBSITE_URL" --output /dev/null
+          printf 'Deployed commit `%s` to %s\n' "$GITHUB_SHA" "$WEBSITE_URL" >> "$GITHUB_STEP_SUMMARY"

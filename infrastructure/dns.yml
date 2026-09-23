@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: DNS hosted zone for a personal website.
+Parameters:
+  DomainName:
+    Type: String
+    Default: jordanhaigh.dev
+    Description: Root domain without https, a path, or www.
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      Name: !Ref DomainName
+Outputs:
+  HostedZoneId:
+    Value: !Ref HostedZone
+  NameServers:
+    Description: Set these four nameservers at your domain registrar.
+    Value: !Join [', ', !GetAtt HostedZone.NameServers]
