@@ -3,18 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#191919">
+    <meta name="robots" content="noindex">
     <title>Page not found · Jordan Haigh</title>
-    <style>
-      :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
-      body { margin: 0; min-height: 100svh; display: grid; place-items: center; }
-      main { padding: 2rem; }
-      a { color: inherit; }
-    </style>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
-    <main>
+    <div class="starfield" aria-hidden="true"></div>
+    <main class="error-page">
+      <div>
+      <span class="eyebrow">404 / WRONG TURN</span>
       <h1>Page not found</h1>
-      <p><a href="/">Back to home</a></p>
+      <p>There's nothing here. Let's get you back.</p>
+      <a class="hero-button" href="/">Back to home <span aria-hidden="true">↗</span></a>
+      </div>
     </main>
   </body>
 </html>

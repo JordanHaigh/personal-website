@@ -3,20 +3,234 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Jordan Haigh's personal website.">
-    <title>Jordan Haigh</title>
-    <style>
-      :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
-      body { margin: 0; min-height: 100svh; display: grid; place-items: center; }
-      main { padding: 2rem; max-width: 40rem; }
-      h1 { font-size: clamp(2.5rem, 8vw, 5rem); letter-spacing: -.05em; margin: 0 0 1rem; }
-      p { font-size: 1.125rem; line-height: 1.6; opacity: .7; }
-    </style>
+    <meta name="theme-color" content="#191919">
+    <meta name="description" content="Jordan Haigh — Senior Full-Stack Engineer and Technical Lead. C#, .NET, React, Azure and AWS, from cloud architecture to data platforms.">
+    <meta property="og:title" content="Jordan Haigh — Senior Full-Stack Engineer">
+    <meta property="og:description" content="Thoughtful software, from architecture to delivery. Explore my work in cloud systems, SaaS, insurance automation and geospatial data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jordanhaigh.dev/">
+    <title>Jordan Haigh — Senior Full-Stack Engineer</title>
+    <link rel="canonical" href="https://jordanhaigh.dev/">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/montserrat-300.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js" defer></script>
   </head>
   <body>
-    <main>
-      <h1>Jordan Haigh</h1>
-      <p>Something new is on the way.</p>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="starfield" aria-hidden="true"></div>
+    <header class="hero" id="home">
+      <canvas id="particles" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <h1>Hello, I'm <span>Jordan.</span><br><span class="hero-subtitle">I'm a full-stack engineer.</span></h1>
+        <p class="hero-role">SENIOR ENGINEER <span aria-hidden="true">/</span> TECHNICAL LEAD</p>
+        <a class="hero-button" href="#projects">View my work <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-7-7 7 7 7-7"/></svg></a>
+      </div>
+      <div class="hero-bottom"><span>JORDAN HAIGH</span><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span>PORTFOLIO / 2026</span></div>
+      <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Pause background animation"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg></button>
+    </header>
+    <nav class="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a class="wordmark" href="#home" aria-label="Jordan Haigh home">J<span>H</span><span class="wordmark-dot">.</span></a>
+        <div class="nav-links">
+          <a href="#home" aria-current="location">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+    <main id="main">
+      <section class="section about" id="about" aria-labelledby="about-title">
+        <h2 class="section-heading" id="about-title">About</h2>
+        <div class="about-grid">
+          <div class="profile">
+            <div class="profile-illustration" aria-hidden="true">
+              <svg viewBox="0 0 240 240" fill="none" aria-hidden="true">
+                <defs><linearGradient id="portrait-gradient" x1="50" y1="20" x2="195" y2="230" gradientUnits="userSpaceOnUse"><stop stop-color="#6493ea"/><stop offset="1" stop-color="#ff5262"/></linearGradient></defs>
+                <path d="M120 30c-29 0-43 20-43 48 0 32 15 57 43 57s43-25 43-57c0-28-14-48-43-48Z M86 147c-9 13-25 17-42 25-17 8-22 22-22 48 51 28 145 28 196 0 0-26-5-40-22-48-17-8-33-12-42-25" stroke="url(#portrait-gradient)" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+              <span>ARCHITECTURE · CODE · COLLABORATION</span>
+            </div>
+            <div class="profile-copy">
+              <p class="eyebrow">A LITTLE ABOUT ME</p>
+              <h3>Complex problems.<br>Practical software.</h3>
+              <p class="bio-copy">I'm a senior full-stack engineer and technical lead. I build maintainable, testable systems with C#, .NET, React, Azure and AWS, working across financial services, SaaS and data platforms.</p>
+              <p class="bio-copy">My work spans architecture, hands-on development and technical delivery. I enjoy turning complex requirements into clear solutions, working directly with stakeholders, reviewing code and helping teams build with confidence.</p>
+              <p class="bio-copy">I started out in aviation and geospatial technology, and have also taught programming and mentored junior developers. Sharing knowledge is a part of how I work.</p>
+              <a class="text-link" href="https://github.com/JordanHaigh" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="skills">
+            <p class="eyebrow">MY TOOLKIT</p>
+            <div class="skills-grid" aria-label="Core technical skills">
+              <div class="skill"><div class="skill-logo-pair"><img class="skill-logo" src="/assets/logos/csharp.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><img class="skill-logo" src="/assets/logos/dotnet.svg" alt="" width="48" height="48" loading="lazy" decoding="async"></div><span>C# / .NET</span></div>
+              <div class="skill"><img class="skill-logo" src="/assets/logos/react.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>React</span></div>
+              <div class="skill"><img class="skill-logo" src="/assets/logos/typescript.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>TypeScript</span></div>
+              <div class="skill"><img class="skill-logo" src="/assets/logos/angular.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>Angular</span></div>
+              <div class="skill"><img class="skill-logo skill-logo-aws" src="/assets/logos/aws.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>AWS</span></div>
+              <div class="skill"><img class="skill-logo" src="/assets/logos/azure.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>Azure</span></div>
+              <div class="skill"><img class="skill-logo" src="/assets/logos/python.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>Python</span></div>
+              <div class="skill"><img class="skill-logo" src="/assets/logos/sql-server.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>SQL Server</span></div>
+              <div class="skill"><img class="skill-logo" src="/assets/logos/terraform.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span>Terraform</span></div>
+            </div>
+            <p class="section-note">Also working with Java, Spring Boot, GraphQL,<br>MySQL, PostgreSQL, MongoDB, Redis, REST APIs, TDD and CI/CD.</p>
+            <div class="leadership-toolkit">
+              <h3 class="eyebrow">LEADERSHIP &amp; DELIVERY</h3>
+              <ul class="leadership-skills" aria-label="Leadership and management skills">
+                <li><h4>Team leadership</h4><p>Leading senior engineers through technical delivery.</p></li>
+                <li><h4>Delivery planning</h4><p>Refining requirements and breaking work into actionable tasks.</p></li>
+                <li><h4>Stakeholder collaboration</h4><p>Aligning on requirements, designs and technical decisions.</p></li>
+                <li><h4>Mentoring &amp; coaching</h4><p>Supporting developers through feedback and shared knowledge.</p></li>
+                <li><h4>Architecture ownership</h4><p>Guiding design decisions, code reviews and engineering quality.</p></li>
+                <li><h4>Technical communication</h4><p>Facilitating workshops, presenting designs and demonstrating progress.</p></li>
+              </ul>
+            </div>
+            <div class="education"><p class="eyebrow">EDUCATION</p><h3>Bachelor of Computer Science</h3><p>With Distinction · Computer Systems &amp; Robotics</p><p>University of Newcastle · 2016–2019</p></div>
+          </div>
+        </div>
+      </section>
+      <section class="section projects" id="projects" aria-labelledby="projects-title">
+        <h2 class="section-heading" id="projects-title">Projects</h2>
+        <p class="section-intro">From complex requirements to working software.<br><span>Selected experience · Anonymous case studies</span></p>
+
+        <article class="project">
+          <div class="project-art art-dashboard" role="img" aria-label="Concept illustration of a cloud system connecting APIs, events, services and data">
+            <span class="art-label">01 / CONCEPT ILLUSTRATION</span>
+            <div class="architecture-art" aria-hidden="true">
+              <div class="diagram-top"><span>SYSTEM / ARCHITECTURE</span><span>↗</span></div>
+              <div class="architecture-node entry-node"><span class="node-symbol">&lt;/&gt;</span><strong>API layer</strong><small>Clear boundaries. Focused services.</small></div>
+              <div class="diagram-connector"></div>
+              <div class="architecture-node event-node"><span class="node-symbol">⌁</span><strong>Event backbone</strong><small>Commands · Events · Queries</small></div>
+              <div class="diagram-branches"><span></span><span></span><span></span></div>
+              <div class="service-row"><div>λ<small>Functions</small></div><div>≋<small>Data</small></div><div>◇<small>Policies</small></div></div>
+              <div class="diagram-caption">DESIGNED FOR SERVERLESS DELIVERY</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-number">01 <span>— TECHNICAL LEAD</span></p>
+            <h3>Cloud transformation<span>Financial administration</span></h3>
+            <p>Led technical design and delivery for a cloud-native transformation, turning complex business requirements into a simpler, maintainable serverless architecture.</p>
+            <div class="tags"><span>C# / .NET</span><span>AWS</span><span>Terraform</span><span>CQRS</span></div>
+            <details><summary class="text-link">Read case study <span aria-hidden="true">+</span></summary>
+              <div class="project-details">
+                <h4>The work</h4><p>Owned architecture decisions, delivery planning and pull-request reviews for a small senior team. Worked directly with stakeholders through workshops, design reviews and demonstrations.</p>
+                <h4>My contribution</h4><p>Redesigned a complex system around serverless execution and improved its structure so developers could work in parallel. The stack included .NET Aspire, Lambda, S3, RDS, SQS, DynamoDB, event sourcing and Open Policy Agent.</p>
+                <h4>Delivery context</h4><p>Established a foundation for continued development and implemented business scenarios with the team. The programme ended before production release, so production outcomes were not measured.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="project project-reverse">
+          <div class="project-art art-chat" role="img" aria-label="Concept illustration of an insurance workflow moving from documents through validation and processing">
+            <span class="art-label">02 / CONCEPT ILLUSTRATION</span>
+            <div class="pipeline-art" aria-hidden="true">
+              <div class="diagram-top"><span>WORKFLOW / AUTOMATION</span><span>↗</span></div>
+              <div class="pipeline-step"><span class="pipeline-icon">01</span><div><strong>Document intake</strong><small>Understand the incoming data</small></div><span class="pipeline-check">✓</span></div>
+              <div class="pipeline-line"></div>
+              <div class="pipeline-step"><span class="pipeline-icon">02</span><div><strong>Validation</strong><small>Make business rules explicit</small></div><span class="pipeline-check">✓</span></div>
+              <div class="pipeline-line"></div>
+              <div class="pipeline-step"><span class="pipeline-icon">03</span><div><strong>Processing</strong><small>Automate the path forward</small></div><span class="pipeline-check">✓</span></div>
+              <div class="pipeline-foot"><span class="status-dot"></span>Built with observability &amp; testing</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-number">02 <span>— SENIOR SOFTWARE DEVELOPER</span></p>
+            <h3>Processing automation<span>Insurance operations</span></h3>
+            <p>Improved an automated processing pipeline by investigating data-quality issues, resolving difficult edge cases and strengthening regression coverage.</p>
+            <div class="tags"><span>.NET</span><span>AWS ECS</span><span>RabbitMQ</span><span>Angular</span></div>
+            <details><summary class="text-link">Read case study <span aria-hidden="true">+</span></summary>
+              <div class="project-details">
+                <h4>The challenge</h4><p>Transactions were falling out of automated processing because of document-extraction inaccuracies, complex business rules and technical failures.</p>
+                <h4>My contribution</h4><p>Introduced a structured approach to categorising failures, added targeted logging and implemented fixes. Designed an automated test framework and unit tests for the affected areas.</p>
+                <h4>The outcome</h4><p>Helped increase straight-through processing and reduce manual intervention. Supported the work through development, testing, production release and hypercare alongside quality engineers, analysts and client developers.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-art art-experiment" role="img" aria-label="Concept illustration of enterprise reporting, search and stakeholder data; not an actual product screenshot">
+            <span class="art-label">03 / CONCEPT ILLUSTRATION</span>
+            <div class="mock-window dashboard-window" aria-hidden="true">
+              <div class="window-top"><i></i><i></i><i></i><span>reporting / workspace</span><b>↗</b></div>
+              <div class="dashboard-body">
+                <div class="mock-sidebar"><span class="mock-logo">w<span>.</span></span><i class="active"></i><i></i><i></i><i></i><i></i></div>
+                <div class="dashboard-main">
+                  <div class="mock-greeting"><span>Clarity from complexity</span><small>Reporting · Search · Visualisation</small></div>
+                  <div class="report-controls"><span>All stakeholders</span><span>Custom fields</span></div>
+                  <div class="chart"><div class="chart-title">Event overview <small>ILLUSTRATIVE DATA</small></div><div class="bars"><i style="--bar:32%"></i><i style="--bar:54%"></i><i style="--bar:43%"></i><i style="--bar:72%"></i><i style="--bar:61%"></i><i style="--bar:85%"></i><i style="--bar:70%"></i><i style="--bar:94%"></i></div></div>
+                  <div class="report-row"><span>Scheduled reports</span><span>→</span></div><div class="report-row"><span>Shared insights</span><span>→</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-number">03 <span>— FULL-STACK SOFTWARE DEVELOPER</span></p>
+            <h3>Enterprise SaaS<span>Multi-tenant product engineering</span></h3>
+            <p>Evolved an enterprise SaaS platform across the front end, back end and cloud, balancing new capabilities with technical-debt reduction and a clearer user experience.</p>
+            <div class="tags"><span>React</span><span>TypeScript</span><span>.NET</span><span>Azure</span><span>GraphQL</span></div>
+            <details><summary class="text-link">Read case study <span aria-hidden="true">+</span></summary>
+              <div class="project-details">
+                <h4>The work</h4><p>Developed stakeholder reporting, dynamic report generation, custom-field and query-based search, event-data visualisation and scheduled reporting.</p>
+                <h4>My contribution</h4><p>Worked across React, Angular, .NET, GraphQL and SQL, with Azure services for application hosting, storage, databases, caching, messaging and secrets management.</p>
+                <h4>Beyond the code</h4><p>Helped establish focused delivery teams, expanded shared technical documentation and mentored junior developers. Supported a product used by enterprise customers across Australia and North America.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="project project-reverse">
+          <div class="project-art art-rail" role="img" aria-label="Concept illustration of a rail route with mapped data capture points">
+            <span class="art-label">04 / CONCEPT ILLUSTRATION</span>
+            <div class="rail-art" aria-hidden="true">
+              <div class="diagram-top"><span>RAIL / SPATIAL EXPLORER</span><span>↗</span></div>
+              <div class="route-map">
+                <svg viewBox="0 0 420 225" fill="none"><path d="M-10 135C55 130 72 18 161 60s87 147 142 89 78-51 130-68" stroke="#36636c" stroke-width="30"/><path d="M-10 135C55 130 72 18 161 60s87 147 142 89 78-51 130-68" stroke="#71c6c8" stroke-width="2"/><path d="m-5 20 430 175M18 220 290-20M200 230 420 10" stroke="#384854" stroke-dasharray="5 5"/><circle cx="82" cy="80" r="6" fill="#ff7584"/><circle cx="196" cy="90" r="6" fill="#ff7584"/><circle cx="280" cy="167" r="6" fill="#ff7584"/><circle cx="350" cy="114" r="6" fill="#ff7584"/><circle cx="196" cy="90" r="16" stroke="#ff7584" stroke-opacity=".5"/></svg>
+                <span class="map-coordinate">CAPTURE → PROCESS → EXPLORE</span>
+              </div>
+              <div class="rail-tools"><span>LiDAR</span><span>Video</span><span>Route data</span></div>
+              <div class="diagram-caption">A CONNECTED VIEW OF THE NETWORK</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-number">04 <span>— SOFTWARE DEVELOPER</span></p>
+            <h3>Rail &amp; geospatial<span>Data platforms and visualisation</span></h3>
+            <p>Built data-processing and visualisation capabilities that brought LiDAR, imagery, video and route data together into a digital view of rail infrastructure.</p>
+            <div class="tags"><span>C# / .NET</span><span>React</span><span>Python</span><span>AWS</span><span>MongoDB</span></div>
+            <details><summary class="text-link">Read case study <span aria-hidden="true">+</span></summary>
+              <div class="project-details">
+                <h4>From capture to platform</h4><p>Built the primary processing pipeline and authenticated upload tool, connecting field data capture with processing, export and the web platform.</p>
+                <h4>Making data useful</h4><p>Developed map-based visualisation in React, synchronised train location with video footage and enabled LiDAR inspection along captured routes. Built train-profile analysis to help assess corridor clearance.</p>
+                <h4>In production</h4><p>Released these capabilities and supported customers in Australia, the United States and the United Kingdom. This work built on earlier experience in LiDAR calibration, C# and WPF tooling, release testing and technical support.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <a class="text-link all-projects" href="https://github.com/JordanHaigh" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a>
+      </section>
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <h2 class="section-heading" id="contact-title">Contact</h2>
+        <p class="contact-intro">Have an idea? Let's talk.</p>
+        <p class="contact-note">Have a project, a technical challenge, or a question?<br>Reach me at <a href="mailto:jhaigh1997@gmail.com">jhaigh1997@gmail.com</a>.</p>
+        <form class="contact-form" id="contact-form" aria-describedby="form-note">
+          <fieldset id="contact-fields" disabled>
+          <label for="name">Name</label><input id="name" name="name" placeholder="Your name" autocomplete="name" required maxlength="100">
+          <label for="email">Email</label><input id="email" name="email" type="email" placeholder="Your email" autocomplete="email" required maxlength="254">
+          <label for="message">Message</label><textarea id="message" name="message" placeholder="What would you like to talk about?" rows="5" required maxlength="5000"></textarea>
+          <div class="form-bottom"><p id="form-note">Prepare your message, then open it in your email app.</p><button class="text-link" type="submit">Prepare email <span aria-hidden="true">↗</span></button></div>
+          </fieldset>
+          <div class="message-preview" id="message-preview" hidden tabindex="-1"><h3>Your email draft</h3><p id="preview-sender"></p><p id="preview-body"></p><a class="text-link" id="email-draft" href="mailto:jhaigh1997@gmail.com">Open email draft <span aria-hidden="true">↗</span></a><p class="preview-note">Opens your email app. Review the draft and send it there.</p></div>
+        </form>
+        <noscript><p class="section-note">The draft builder needs JavaScript. You can email me directly using the link above.</p></noscript>
+      </section>
     </main>
+    <footer class="footer">
+      <a class="back-to-top" href="#home" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 14 7-7 7 7m-14 5 7-7 7 7"/></svg></a>
+      <a class="github-link" href="https://github.com/JordanHaigh" target="_blank" rel="noopener noreferrer" aria-label="Jordan Haigh on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.86c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.83c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.33 4.69-4.56 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+      <p>JORDAN HAIGH <span>© <span id="year">2026</span></span></p>
+      <span class="footer-domain">jordanhaigh.dev</span>
+    </footer>
   </body>
 </html>

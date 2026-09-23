@@ -1,8 +1,12 @@
 # Personal website
 
-A fresh static site for **jordanhaigh.dev**, prepared for AWS hosting. Edit the files in `site/`; there are no dependencies or build step.
+A dark, responsive portfolio for **jordanhaigh.dev**, prepared for AWS hosting. Edit the files in `site/`; there are no dependencies or build step.
 
-- `site/` — the website and a 404 page.
+- `site/index.html` — portfolio content: hero, about, skills, projects, and contact.
+- `site/styles.css` — responsive layout, typography, and original project illustrations.
+- `site/script.js` — particle animation, active navigation, and local email draft builder.
+- `site/assets/` — locally hosted fonts, technology logos, licenses, and the favicon.
+- `site/404.html` — matching error page.
 - `infrastructure/dns.yml` — creates a Route 53 hosted zone if you need one.
 - `infrastructure/website.yml` — creates a private S3 bucket, CloudFront distribution, HTTPS certificate, root and `www` DNS records, and the GitHub deployment role.
 - `.github/workflows/deploy.yml` — deploys only when you click **Run workflow** in GitHub.
@@ -14,6 +18,20 @@ python3 -m http.server 8000 --directory site
 ```
 
 Open <http://localhost:8000>. Stop the server with Ctrl+C.
+
+## Portfolio content
+
+The design follows the visual direction of [benscott.dev](https://benscott.dev/), with an original implementation and illustrations. The biography, skills, education and four case studies are based on Jordan's supplied professional profile. The two supplied PDFs were identical.
+
+Client work is presented anonymously, with client and employer names and detailed commercial metrics omitted. Case studies cover cloud transformation, insurance processing, enterprise SaaS and rail/geospatial data. The cloud-transformation case study explicitly notes that the programme ended before production release; it does not claim measured production results.
+
+Update the content directly in `site/index.html`. The profile outline is decorative; project visuals are labeled concept illustrations, not screenshots or evidence of actual product interfaces. The original PDFs are not included in the website or offered for download.
+
+Contact uses **jhaigh1997@gmail.com**. Visitors can email directly, or complete the form to prepare and review a draft locally. **Open email draft** opens their email application; they send the email themselves. There is no backend form delivery, network submission or storage of form data. If changing the address, update both `site/index.html` and `site/script.js`.
+
+The animated background respects reduced-motion preferences, has a pause/play button, and stops rendering when off-screen or in a hidden tab. Navigation, case studies and the direct email link work without JavaScript; the draft builder stays disabled if JavaScript is unavailable. All fonts and graphics are served locally.
+
+Toolkit logos come from [Devicon](https://github.com/devicons/devicon) and the official [.NET brand repository](https://github.com/dotnet/brand). Original SVGs, attribution and the Devicon license are in `site/assets/logos/`. The AWS logo sits on a light background for contrast without recoloring the asset.
 
 ## One-time AWS setup
 
