@@ -109,6 +109,12 @@ Wait for the DNS check to pass in **Settings → Pages**, then select **Enforce 
 
 Pushes and pull requests do not trigger deployment. To roll back, revert the relevant commit, push, and manually run the workflow again.
 
+### If deployment says “Get Pages site failed: Not Found”
+
+Open [Settings → Pages](https://github.com/JordanHaigh/personal-website/settings/pages) and select **GitHub Actions** under **Build and deployment → Source**. Save if prompted, then rerun the workflow. This enables the Pages site that `configure-pages` looks up. If Pages settings are unavailable, check repository administrator access and whether your GitHub plan supports Pages for the repository's visibility.
+
+The workflow uses Node 24 and current Pages actions. A Node 20 deprecation warning is separate from this missing-site error; do not enable `ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION`. The action's `enablement: true` option needs a separate privileged token, so this workflow uses the one-time settings step instead. See [configure-pages inputs](https://github.com/actions/configure-pages/blob/v6/action.yml).
+
 ## Remove the previous AWS setup
 
 The AWS templates have been removed from this repository. The deployment workflow only uses GitHub Pages.
