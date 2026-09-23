@@ -1,11 +1,13 @@
 # Personal website
 
-A dark, responsive portfolio for **jordanhaigh.dev**, prepared for AWS hosting. Edit the files in `site/`; there are no dependencies or build step.
+A dark, responsive React portfolio for **jordanhaigh.dev**, prepared for AWS hosting. Vite provides Fast Refresh during development and builds static files for S3 and CloudFront. No application server is needed in production.
 
-- `site/index.html` — portfolio content: hero, about, skills, projects, and contact.
-- `site/styles.css` — responsive layout, typography, and original project illustrations.
-- `site/script.js` — particle animation, active navigation, and local email draft builder.
-- `site/assets/` — locally hosted fonts, technology logos, licenses, and the favicon.
+- `site/index.html` — page metadata and React entry point.
+- `site/src/App.jsx` — page composition.
+- `site/src/components/` — hero, navigation, about/toolkit, projects, contact and footer components.
+- `site/src/styles.css` — responsive layout, typography, and original project illustrations.
+- `site/src/particles.js` — particle renderer, with cleanup for React updates.
+- `site/public/` — locally hosted fonts, technology logos, licenses, favicon, robots.txt and sitemap.
 - `site/404.html` — matching error page.
 - `infrastructure/dns.yml` — creates a Route 53 hosted zone if you need one.
 - `infrastructure/website.yml` — creates a private S3 bucket, CloudFront distribution, HTTPS certificate, root and `www` DNS records, and the GitHub deployment role.
@@ -13,11 +15,26 @@ A dark, responsive portfolio for **jordanhaigh.dev**, prepared for AWS hosting. 
 
 ## Preview locally
 
+Use Node.js 24 LTS (`nvm use` if you use nvm). Node 20.19+ and 22.12+ are also supported; odd-numbered releases are not supported by the test runner.
+
 ```sh
-python3 -m http.server 8000 --directory site
+npm ci
+npm run dev
 ```
 
-Open <http://localhost:8000>. Stop the server with Ctrl+C.
+Open <http://localhost:8000>. CSS changes update immediately and React components use Fast Refresh, preserving local state where possible. HTML changes reload the page. `npm start` is an alias for the same server. Stop it with Ctrl+C.
+
+If the old Python preview server is still running, stop it first so port 8000 is available. Vite reports a port conflict instead of silently moving to another port. When switching from the Python server, refresh any already-open preview tab once to load Vite's live-reload client.
+
+To test and preview the production build:
+
+```sh
+npm test
+npm run build
+npm run preview
+```
+
+The production preview opens at <http://localhost:4173>. Build output goes to `dist/`, including a standalone `404.html`. The manual GitHub workflow installs dependencies, runs tests, builds the app, and uploads only `dist/`. Assets in `site/public/` are copied unchanged; application JavaScript and CSS get hashed filenames. Neither dependencies nor source/test files are deployed.
 
 ## Portfolio content
 
@@ -25,13 +42,13 @@ The design follows the visual direction of [benscott.dev](https://benscott.dev/)
 
 Client work is presented anonymously, with client and employer names and detailed commercial metrics omitted. Case studies cover cloud transformation, insurance processing, enterprise SaaS and rail/geospatial data. The cloud-transformation case study explicitly notes that the programme ended before production release; it does not claim measured production results.
 
-Update the content directly in `site/index.html`. The profile outline is decorative; project visuals are labeled concept illustrations, not screenshots or evidence of actual product interfaces. The original PDFs are not included in the website or offered for download.
+Update content in `site/src/components/`: `Hero.jsx` for the introduction, `About.jsx` for the biography and toolkit, and `Projects.jsx` for case studies. The NGM Starter profile is the source of truth. The profile outline is decorative; project visuals are labeled concept illustrations, not screenshots or evidence of actual product interfaces. The original PDFs are not included in the website or offered for download.
 
-Contact uses **jhaigh1997@gmail.com**. Visitors can email directly, or complete the form to prepare and review a draft locally. **Open email draft** opens their email application; they send the email themselves. There is no backend form delivery, network submission or storage of form data. If changing the address, update both `site/index.html` and `site/script.js`.
+Contact uses **jhaigh1997@gmail.com**. Visitors can email directly, or complete the form to prepare and review a draft locally. **Open email draft** opens their email application; they send the email themselves. There is no backend form delivery, network submission or storage of form data. If changing the address, update `contactEmail` in `site/src/components/Contact.jsx` and the no-JavaScript fallback in `site/index.html`.
 
-The animated background respects reduced-motion preferences, has a pause/play button, and stops rendering when off-screen or in a hidden tab. Navigation, case studies and the direct email link work without JavaScript; the draft builder stays disabled if JavaScript is unavailable. All fonts and graphics are served locally.
+The animated background respects reduced-motion preferences and stops rendering when off-screen or in a hidden tab. React requires JavaScript; a fallback provides direct email and GitHub links when JavaScript is disabled. The 404 page works without JavaScript. All fonts and graphics are served locally.
 
-Toolkit logos come from [Devicon](https://github.com/devicons/devicon) and the official [.NET brand repository](https://github.com/dotnet/brand). Original SVGs, attribution and the Devicon license are in `site/assets/logos/`. The AWS logo sits on a light background for contrast without recoloring the asset.
+Toolkit logos come from [Devicon](https://github.com/devicons/devicon) and the official [.NET brand repository](https://github.com/dotnet/brand). Original SVGs, attribution and the Devicon license are in `site/public/assets/logos/`. The AWS logo sits on a light background for contrast without recoloring the asset.
 
 ## One-time AWS setup
 
@@ -100,7 +117,7 @@ The template defaults to the standard OIDC subject format for this older reposit
 3. Select the default branch and click **Run workflow**. Other branches are skipped.
 4. Wait for the run to turn green, then visit your domain.
 
-The workflow uploads `site/`, removes remote files absent from that folder, refreshes CloudFront, waits for the refresh, and checks that the website responds successfully. Pushes and pull requests do not trigger deployment. The generated S3 bucket is dedicated to this site; do not store unrelated files there.
+The workflow tests and builds the React app, uploads `dist/`, removes remote files absent from that folder, refreshes CloudFront, waits for the refresh, and checks that the website responds successfully. Pushes and pull requests do not trigger deployment. The generated S3 bucket is dedicated to this site; do not store unrelated files there.
 
 To roll back site content, revert the relevant commit on the default branch, push, and run the workflow again. Deployments update S3 files in place rather than switching releases atomically; keep this in mind when adding a larger app later. Caching is disabled initially so the starter is easy to update.
 

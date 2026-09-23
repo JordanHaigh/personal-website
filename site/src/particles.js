@@ -1,63 +1,7 @@
-"use strict";
-
-// Navigation and content work without JavaScript; enhancements stay optional.
-document.getElementById("year").textContent = new Date().getFullYear();
-
-const form = document.getElementById("contact-form");
-const fields = document.getElementById("contact-fields");
-const preview = document.getElementById("message-preview");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const values = new FormData(form);
-  const name = String(values.get("name")).trim();
-  const email = String(values.get("email")).trim();
-  const message = String(values.get("message")).trim();
-  document.getElementById("preview-sender").textContent = name + " · " + email;
-  document.getElementById("preview-body").textContent = message;
-  const body = message + "\n\nFrom: " + name + "\nReply to: " + email;
-  document.getElementById("email-draft").href = "mailto:jhaigh1997@gmail.com?subject=" +
-    encodeURIComponent("Website enquiry from " + name) + "&body=" + encodeURIComponent(body);
-  preview.hidden = false;
-  preview.focus();
-});
-for (const input of form.querySelectorAll("input, textarea")) {
-  input.addEventListener("input", () => {
-    input.setCustomValidity(input.value.trim() ? "" : "Please fill out this field.");
-    preview.hidden = true;
-  });
-}
-fields.disabled = false;
-
-const navLinks = [...document.querySelectorAll(".nav-links a")];
-const sections = [...document.querySelectorAll(".hero, main > section")];
-let scrollPending = false;
-function updateNavigation() {
-  const marker = Math.min(window.innerHeight * 0.35, 250);
-  let current = sections[0].id;
-  for (const section of sections) {
-    if (section.getBoundingClientRect().top <= marker) current = section.id;
-  }
-  for (const link of navLinks) {
-    if (link.hash === "#" + current) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
-  }
-  scrollPending = false;
-}
-window.addEventListener("scroll", () => {
-  if (!scrollPending) {
-    scrollPending = true;
-    requestAnimationFrame(updateNavigation);
-  }
-}, { passive: true });
-window.addEventListener("resize", updateNavigation, { passive: true });
-updateNavigation();
-
-// Original canvas animation: a slowly turning constellation around the headline.
-// Bounded particle count and a capped pixel ratio keep mobile rendering light.
-const canvas = document.getElementById("particles");
-const context = canvas.getContext("2d");
-const motionToggle = document.querySelector(".motion-toggle");
-if (context) {
+// A bounded particle count and capped pixel ratio keep mobile rendering light.
+export function startParticles(canvas, hero) {
+  const context = canvas.getContext("2d");
+  if (!context) return;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let paused = reducedMotion.matches;
   let visible = true;
@@ -148,28 +92,36 @@ if (context) {
     if (frame !== null) cancelAnimationFrame(frame);
     frame = null;
     previousTime = null;
-    motionToggle.setAttribute("aria-pressed", String(paused));
-    motionToggle.setAttribute("aria-label", paused ? "Play background animation" : "Pause background animation");
-    motionToggle.querySelector("path").setAttribute("d", paused ? "M6 4l9 6-9 6Z" : "M7 5v10M13 5v10");
     if (!paused && visible && !document.hidden) frame = requestAnimationFrame(tick);
   }
-  motionToggle.addEventListener("click", () => { paused = !paused; updateAnimation(); });
-  reducedMotion.addEventListener("change", () => { paused = reducedMotion.matches; updateAnimation(); });
+  function onMotionChange() { paused = reducedMotion.matches; updateAnimation(); }
+  reducedMotion.addEventListener("change", onMotionChange);
   document.addEventListener("visibilitychange", updateAnimation);
-  document.querySelector(".hero").addEventListener("pointermove", (event) => {
+  function onPointerMove(event) {
     if (event.pointerType !== "mouse" || paused) return;
     pointer = { x: (event.clientX / width - 0.5) * 0.3, y: (event.clientY / height - 0.5) * 0.25 };
-  }, { passive: true });
-  document.querySelector(".hero").addEventListener("pointerleave", () => { pointer = { x: 0, y: 0 }; });
+  }
+  function onPointerLeave() { pointer = { x: 0, y: 0 }; }
+  hero.addEventListener("pointermove", onPointerMove, { passive: true });
+  hero.addEventListener("pointerleave", onPointerLeave);
+  let observer;
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(([entry]) => {
+    observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       updateAnimation();
-    }).observe(canvas);
+    });
+    observer.observe(canvas);
   }
   window.addEventListener("resize", resize, { passive: true });
   resize();
   updateAnimation();
-} else {
-  motionToggle.hidden = true;
+  return () => {
+    if (frame !== null) cancelAnimationFrame(frame);
+    observer?.disconnect();
+    reducedMotion.removeEventListener("change", onMotionChange);
+    document.removeEventListener("visibilitychange", updateAnimation);
+    hero.removeEventListener("pointermove", onPointerMove);
+    hero.removeEventListener("pointerleave", onPointerLeave);
+    window.removeEventListener("resize", resize);
+  };
 }
