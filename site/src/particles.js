@@ -122,6 +122,7 @@ export function startParticles(canvas, hero, infoPanel = null) {
   let width = 0;
   let height = 0;
   let stars = [];
+  let surroundingStars = [];
   let connections = [];
   let hoverPoint = null;
   let hovered = null;
@@ -153,6 +154,7 @@ export function startParticles(canvas, hero, infoPanel = null) {
       return seed / 4294967296;
     }
     stars = [];
+    surroundingStars = [];
     connections = [];
 
     // Each small star map lies on its own tangent plane, so different
@@ -198,6 +200,27 @@ export function startParticles(canvas, hero, infoPanel = null) {
         phase: random() * Math.PI * 2,
       });
     }
+
+    // Preserve the original sphere's star count. Only add a sparse continuation
+    // beyond it, blending into the edge before thinning toward distant corners.
+    const sphereRadius = Math.max(1, Math.min(width * 0.3, height * 0.32, 290));
+    const candidates = Math.min(12000, Math.ceil(width * height / 400));
+    for (let i = 0; i < candidates; i++) {
+      const x = random() * width;
+      const y = random() * height;
+      const distance = Math.hypot(x - width / 2, y - (height / 2 - 8)) / sphereRadius;
+      const blend = Math.max(0, Math.min(1, (distance - 1.65) / 0.65));
+      const edgeFade = blend * blend * (3 - 2 * blend);
+      const outerFalloff = Math.exp(-((Math.max(0, distance - 2.3) / 2) ** 2));
+      const density = edgeFade * (0.035 + 0.12 * outerFalloff);
+      if (random() >= density) continue;
+      surroundingStars.push({
+        x, y,
+        size: 0.35 + random() ** 2 * 0.8,
+        brightness: (0.2 + random() * 0.35) * (0.65 + density * 0.35),
+        phase: random() * Math.PI * 2,
+      });
+    }
   }
 
   function resize() {
@@ -213,8 +236,16 @@ export function startParticles(canvas, hero, infoPanel = null) {
 
   function draw() {
     context.clearRect(0, 0, width, height);
+    // Distant stars twinkle quietly behind the rotating constellation sphere.
+    for (const star of surroundingStars) {
+      const twinkle = 0.86 + Math.sin(elapsed * 0.5 + star.phase) * 0.14;
+      context.fillStyle = `rgba(168, 192, 230, ${star.brightness * twinkle})`;
+      context.beginPath();
+      context.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      context.fill();
+    }
+    // Use the same scale on both axes so wide viewports keep a spherical sky.
     const radius = Math.min(width * 0.3, height * 0.32, 290);
-    const spreadX = Math.min(1.65, Math.max(1, width / Math.max(height, 1) * 0.82));
     const turn = elapsed * 0.045;
     const tilt = 0.08 + Math.sin(elapsed * 0.08) * 0.12;
     const cos = Math.cos(turn), sin = Math.sin(turn);
@@ -228,7 +259,7 @@ export function startParticles(canvas, hero, infoPanel = null) {
       const twinkle = 0.86 + Math.sin(elapsed * 0.8 + star.phase) * 0.14;
       return {
         ...star,
-        x: width / 2 + turnedX * radius * scale * spreadX,
+        x: width / 2 + turnedX * radius * scale,
         y: height / 2 + tiltedY * radius * scale - 8,
         depth,
         size: star.size * scale,

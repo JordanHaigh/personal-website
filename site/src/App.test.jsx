@@ -11,7 +11,7 @@ describe("portfolio", () => {
     const { container } = render(<StrictMode><App /></StrictMode>);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain("Jordan.");
     expect(container.querySelector(".hero-role").textContent).toBe("TECHNICAL LEAD / SENIOR ENGINEER");
-    expect(screen.getByRole("link", { name: /CV \/ 2026/ }).getAttribute("href")).toBe(`${import.meta.env.BASE_URL}cv.html`);
+    expect(screen.getByRole("link", { name: /CV \/ 2026/ }).getAttribute("href")).toBe(`${import.meta.env.BASE_URL}cv`);
     expect(container.querySelectorAll(".project details")).toHaveLength(4);
     expect(container.querySelectorAll(".leadership-skills li")).toHaveLength(6);
     const logos = container.querySelectorAll(".skill img");

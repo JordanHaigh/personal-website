@@ -10,7 +10,7 @@ export default function CV() {
         <a href={siteUrl("")}><span aria-hidden="true">←</span> Back to portfolio</a>
         <a className="cv-download" href={siteUrl("Jordan-Haigh-CV.pdf")} download="Jordan-Haigh-CV.pdf">Download PDF <span aria-hidden="true">↓</span></a>
       </nav>
-      <main id="cv" className="cv-paper">
+      <main id="cv" className="cv-paper" tabIndex={-1}>
         <header className="cv-header">
           <p className="cv-kicker">Curriculum vitae</p>
           <h1>{cv.name}<span aria-hidden="true">.</span></h1>

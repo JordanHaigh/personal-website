@@ -41,7 +41,7 @@ export default function Navigation() {
               {id.charAt(0).toUpperCase() + id.slice(1)}
             </a>
           ))}
-          <a href={siteUrl("cv.html")}>CV</a>
+          <a href={siteUrl("cv")}>CV</a>
         </div>
       </div>
     </nav>

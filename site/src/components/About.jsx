@@ -9,6 +9,7 @@ export default function About() {
           <div className="profile">
             <div className="profile-illustration">
               <ProfilePortrait />
+              <p className="profile-location">Newcastle, Australia</p>
               <div className="profile-links">
                 <a className="text-link" href="https://www.linkedin.com/in/jordanhaigh/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
                 <a className="text-link" href="https://github.com/JordanHaigh" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a>
@@ -19,7 +20,7 @@ export default function About() {
               <p className="bio-copy">I'm a senior full-stack engineer and technical lead. I build maintainable, testable systems with C#, .NET, React, Azure and AWS, working across financial services, SaaS and data platforms.</p>
               <p className="bio-copy">My work spans architecture, hands-on development and technical delivery. I enjoy turning complex requirements into clear solutions, working directly with stakeholders, reviewing code and helping teams build with confidence.</p>
               <p className="bio-copy">I started out in aviation and geospatial technology, and have also taught programming and mentored junior developers. Sharing knowledge is a part of how I work.</p>
-              <a className="text-link" href={siteUrl("cv.html")}>View my CV <span aria-hidden="true">→</span></a>
+              <a className="text-link" href={siteUrl("cv")}>View my CV <span aria-hidden="true">→</span></a>
             </div>
           </div>
           <div className="skills">

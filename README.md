@@ -7,7 +7,6 @@ A dark, responsive React portfolio for **jordanhaigh.dev**, hosted on **GitHub P
 - `site/src/components/CV.jsx` and `site/src/cv.css` — CV page and responsive/print layouts.
 - `site/src/cv-data.js` — shared content for the HTML CV and downloadable PDF.
 - `scripts/build-cv-pdf.mjs` — creates the PDF with embedded local fonts during development startup and production builds.
-- `site/resume.html` — redirects the original résumé URL to `/cv.html`.
 - `site/src/App.jsx` — page composition.
 - `site/src/components/` — hero, navigation, about/toolkit, projects, contact and footer components.
 - `site/src/styles.css` — responsive layout, typography, and original project illustrations.
@@ -42,7 +41,7 @@ The production preview opens at <http://localhost:4173>. Build output goes to `d
 
 ## Portfolio content
 
-The home screen's **CV / 2026** link opens `/cv.html`. This separate React entry is built as a real HTML path for GitHub Pages, so direct visits and refreshes work without a routing fallback. It uses the old CV’s sidebar layout as a reference, styled with the portfolio’s charcoal background, Montserrat font and blue/coral accents. Content comes from the NGM Starter profile, with anonymous client/employer descriptions, skills, leadership and education. Visitors can use **Download PDF** to save a clean, selectable-text CV with a light background and no browser-generated URL, timestamp or page-title headers. HTML and PDF content both come from `site/src/cv-data.js`; keep its contact details in sync with the portfolio. `npm run dev` and `npm run build` generate `site/public/Jordan-Haigh-CV.pdf` using PDFKit, and Vite includes it in `dist/`. The generated PDF is not committed. After editing CV content during an existing dev session, run `npm run build:cv` to refresh the download.
+The home screen's **CV / 2026** link opens `/cv`. This separate React entry is built as `cv.html`; GitHub Pages serves it at the extensionless `/cv` URL, so direct visits and refreshes work without a routing fallback. The old `/cv.html` address also remains available. It uses the old CV’s sidebar layout as a reference, styled with the portfolio’s charcoal background, Montserrat font and blue/coral accents. Content comes from the NGM Starter profile, with anonymous client/employer descriptions, skills, leadership and education. Visitors can use **Download PDF** to save a clean, selectable-text CV with a light background and no browser-generated URL, timestamp or page-title headers. HTML and PDF content both come from `site/src/cv-data.js`; keep its contact details in sync with the portfolio. `npm run dev` and `npm run build` generate `site/public/Jordan-Haigh-CV.pdf` using PDFKit, and Vite includes it in `dist/`. The generated PDF is not committed. After editing CV content during an existing dev session, run `npm run build:cv` to refresh the download.
 
 The design follows the visual direction of [benscott.dev](https://benscott.dev/), with an original implementation and illustrations. The biography, skills, education and four case studies are based on Jordan's supplied professional profile. The two supplied PDFs were identical.
 
@@ -105,7 +104,7 @@ Wait for the DNS check to pass in **Settings → Pages**, then select **Enforce 
 2. Open **Actions → Deploy website → Run workflow**.
 3. Select `master` and click **Run workflow**. Other branches are skipped.
 4. The build job installs dependencies, runs tests, generates the CV PDF, builds the site and uploads `dist/`. The deployment job publishes that artifact to GitHub Pages.
-5. After the workflow succeeds and DNS is ready, check [the website](https://jordanhaigh.dev/), [the HTML CV](https://jordanhaigh.dev/cv.html), and [the PDF download](https://jordanhaigh.dev/Jordan-Haigh-CV.pdf).
+5. After the workflow succeeds and DNS is ready, check [the website](https://jordanhaigh.dev/), [the HTML CV](https://jordanhaigh.dev/cv), and [the PDF download](https://jordanhaigh.dev/Jordan-Haigh-CV.pdf).
 
 Pushes and pull requests do not trigger deployment. To roll back, revert the relevant commit, push, and manually run the workflow again.
 
