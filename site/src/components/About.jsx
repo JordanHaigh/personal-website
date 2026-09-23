@@ -18,6 +18,7 @@ export default function About() {
               <p className="bio-copy">I'm a senior full-stack engineer and technical lead. I build maintainable, testable systems with C#, .NET, React, Azure and AWS, working across financial services, SaaS and data platforms.</p>
               <p className="bio-copy">My work spans architecture, hands-on development and technical delivery. I enjoy turning complex requirements into clear solutions, working directly with stakeholders, reviewing code and helping teams build with confidence.</p>
               <p className="bio-copy">I started out in aviation and geospatial technology, and have also taught programming and mentored junior developers. Sharing knowledge is a part of how I work.</p>
+              <a className="text-link" href="/cv.html">View my CV <span aria-hidden="true">→</span></a>
             </div>
           </div>
           <div className="skills">
