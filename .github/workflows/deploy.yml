@@ -60,6 +60,8 @@ jobs:
           npm test
           npm run build
           test -s dist/index.html
+          test -s dist/cv.html
+          test -s dist/Jordan-Haigh-CV.pdf
           test -s dist/404.html
 
       - name: Authenticate with AWS

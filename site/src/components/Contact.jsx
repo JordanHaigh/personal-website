@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const contactEmail = "jhaigh1997@gmail.com";
+const contactEmail = "jordan@jordanhaigh.dev";
 
 export default function Contact() {
   const [draft, setDraft] = useState(null);

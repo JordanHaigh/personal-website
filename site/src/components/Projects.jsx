@@ -119,7 +119,9 @@ export default function Projects() {
             </details>
           </div>
         </article>
-        <a className="text-link all-projects" href="https://github.com/JordanHaigh" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a>
+        <p className="personal-projects-link">
+          <a href="https://github.com/JordanHaigh" target="_blank" rel="noopener noreferrer">See my personal projects on GitHub <span aria-hidden="true">↗</span></a>
+        </p>
       </section>
   );
 }

@@ -11,6 +11,7 @@ describe("portfolio", () => {
     const { container } = render(<StrictMode><App /></StrictMode>);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain("Jordan.");
     expect(container.querySelector(".hero-role").textContent).toBe("TECHNICAL LEAD / SENIOR ENGINEER");
+    expect(screen.getByRole("link", { name: /CV \/ 2026/ }).getAttribute("href")).toBe("/cv.html");
     expect(container.querySelectorAll(".project details")).toHaveLength(4);
     expect(container.querySelectorAll(".leadership-skills li")).toHaveLength(6);
     const logos = container.querySelectorAll(".skill img");
@@ -52,7 +53,7 @@ describe("contact draft", () => {
     fireEvent.click(screen.getByRole("button", { name: /Prepare email/ }));
     const link = screen.getByRole("link", { name: /Open email draft/ });
     const url = new URL(link.href);
-    expect(url.pathname).toBe("jhaigh1997@gmail.com");
+    expect(url.pathname).toBe("jordan@jordanhaigh.dev");
     expect(url.searchParams.get("subject")).toBe("Website enquiry from Alex & Sam");
     expect(url.searchParams.get("body")).toBe('<script>alert("hello")</script> & more\n\nFrom: Alex & Sam\nReply to: alex@example.com');
     expect(document.getElementById("preview-body").children).toHaveLength(0);
@@ -113,5 +114,48 @@ describe("animation lifecycle", () => {
     media.matches = true;
     media.dispatchEvent(new Event("change"));
     expect(frames.size).toBe(0);
+  });
+
+  it("labels and highlights a constellation on hover, including with reduced motion", () => {
+    const { context, frames } = mockAnimation(true);
+    vi.spyOn(HTMLCanvasElement.prototype, "clientWidth", "get").mockReturnValue(1200);
+    vi.spyOn(HTMLCanvasElement.prototype, "clientHeight", "get").mockReturnValue(800);
+    const strokes = [];
+    Object.defineProperty(context, "strokeStyle", { configurable: true, set: (value) => strokes.push(value) });
+    const { container } = render(<Hero />);
+    const canvas = container.querySelector("canvas");
+    const infoPanel = container.querySelector(".constellation-info");
+    // The first drawn segment starts at a star in Crux. Use its rendered
+    // position to exercise hit testing rather than duplicating projection math.
+    const [clientX, clientY] = context.moveTo.mock.calls[0];
+    function move(target, x, y) {
+      const event = new Event("pointermove", { bubbles: true });
+      Object.assign(event, { pointerType: "mouse", clientX: x, clientY: y });
+      fireEvent(target, event);
+    }
+    move(canvas, clientX, clientY);
+    expect(infoPanel.dataset.visible).toBe("true");
+    expect(infoPanel.querySelector("[data-constellation-name]").textContent).toBe("Crux");
+    expect(infoPanel.querySelector("[data-constellation-meaning]").textContent).toBe("Southern Cross");
+    expect(strokes).toContain("rgba(255, 139, 151, 0.95)");
+    expect(infoPanel.style.transform).toBe("");
+    expect(container.querySelector(".constellation-tooltip")).toBeNull();
+    expect(frames.size).toBe(0);
+    // Text above the canvas still permits constellation hover through it.
+    move(screen.getByRole("heading", { level: 1 }), clientX, clientY);
+    expect(infoPanel.dataset.visible).toBe("true");
+    expect(infoPanel.querySelector("[data-constellation-name]").textContent).toBe("Crux");
+    move(container.querySelector(".hero-role"), clientX, clientY);
+    expect(infoPanel.dataset.visible).toBe("true");
+    move(screen.getByRole("link", { name: /View my work/ }), clientX, clientY);
+    expect(infoPanel.dataset.visible).toBe("false");
+    move(canvas, clientX, clientY);
+    fireEvent.pointerLeave(container.querySelector(".hero"));
+    expect(infoPanel.dataset.visible).toBe("false");
+    move(canvas, clientX, clientY);
+    fireEvent.scroll(window);
+    expect(infoPanel.dataset.visible).toBe("false");
+    move(canvas, 0, 0);
+    expect(infoPanel.dataset.visible).toBe("false");
   });
 });

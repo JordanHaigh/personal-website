@@ -10,7 +10,7 @@ Devicon source paths under icons/:
 - react/react-original.svg
 - typescript/typescript-original.svg
 - angular/angular-original.svg
-- amazonwebservices/amazonwebservices-original-wordmark.svg
+- amazonwebservices/amazonwebservices-plain-wordmark.svg
 - azure/azure-original.svg
 - python/python-original.svg
 - microsoftsqlserver/microsoftsqlserver-original.svg

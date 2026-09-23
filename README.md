@@ -3,6 +3,11 @@
 A dark, responsive React portfolio for **jordanhaigh.dev**, prepared for AWS hosting. Vite provides Fast Refresh during development and builds static files for S3 and CloudFront. No application server is needed in production.
 
 - `site/index.html` — page metadata and React entry point.
+- `site/cv.html` — dedicated professional CV page, linked from the home screen.
+- `site/src/components/CV.jsx` and `site/src/cv.css` — CV page and responsive/print layouts.
+- `site/src/cv-data.js` — shared content for the HTML CV and downloadable PDF.
+- `scripts/build-cv-pdf.mjs` — creates the PDF with embedded local fonts during development startup and production builds.
+- `site/resume.html` — redirects the original résumé URL to `/cv.html`.
 - `site/src/App.jsx` — page composition.
 - `site/src/components/` — hero, navigation, about/toolkit, projects, contact and footer components.
 - `site/src/styles.css` — responsive layout, typography, and original project illustrations.
@@ -38,17 +43,19 @@ The production preview opens at <http://localhost:4173>. Build output goes to `d
 
 ## Portfolio content
 
+The home screen's **CV / 2026** link opens `/cv.html`. This separate React entry is built as a real HTML path for S3/CloudFront, so direct visits and refreshes work without a routing fallback. It uses the old CV’s sidebar layout as a reference, styled with the portfolio’s charcoal background, Montserrat font and blue/coral accents. Content comes from the NGM Starter profile, with anonymous client/employer descriptions, skills, leadership and education. Visitors can use **Download PDF** to save a clean, selectable-text CV with a light background and no browser-generated URL, timestamp or page-title headers. HTML and PDF content both come from `site/src/cv-data.js`; keep its contact details in sync with the portfolio. `npm run dev` and `npm run build` generate `site/public/Jordan-Haigh-CV.pdf` using PDFKit, and Vite includes it in `dist/`. The generated PDF is not committed. After editing CV content during an existing dev session, run `npm run build:cv` to refresh the download.
+
 The design follows the visual direction of [benscott.dev](https://benscott.dev/), with an original implementation and illustrations. The biography, skills, education and four case studies are based on Jordan's supplied professional profile. The two supplied PDFs were identical.
 
 Client work is presented anonymously, with client and employer names and detailed commercial metrics omitted. Case studies cover cloud transformation, insurance processing, enterprise SaaS and rail/geospatial data. The cloud-transformation case study explicitly notes that the programme ended before production release; it does not claim measured production results.
 
-Update content in `site/src/components/`: `Hero.jsx` for the introduction, `About.jsx` for the biography and toolkit, and `Projects.jsx` for case studies. The NGM Starter profile is the source of truth. The profile outline is decorative; project visuals are labeled concept illustrations, not screenshots or evidence of actual product interfaces. The original PDFs are not included in the website or offered for download.
+Update content in `site/src/components/`: `Hero.jsx` for the introduction, `About.jsx` for the biography and toolkit, and `Projects.jsx` for case studies. The NGM Starter profile is the source of truth. The profile photo loads directly from LinkedIn's CDN using `linkedInPhotoUrl` in `ProfilePortrait.jsx`, with a circular blue-to-coral border. If the request fails (including an expired CDN URL), the original gradient SVG in `ProfileFallback.jsx` appears automatically. No copy of the photo is stored in the repository; project visuals are labeled concept illustrations, not screenshots or evidence of actual product interfaces. The original PDFs are not included in the website or offered for download.
 
-Contact uses **jhaigh1997@gmail.com**. Visitors can email directly, or complete the form to prepare and review a draft locally. **Open email draft** opens their email application; they send the email themselves. There is no backend form delivery, network submission or storage of form data. If changing the address, update `contactEmail` in `site/src/components/Contact.jsx` and the no-JavaScript fallback in `site/index.html`.
+Contact uses **jordan@jordanhaigh.dev**. Visitors can email directly, or complete the form to prepare and review a draft locally. **Open email draft** opens their email application; they send the email themselves. There is no backend form delivery, network submission or storage of form data. If changing the address, update `contactEmail` in `site/src/components/Contact.jsx` and the no-JavaScript fallback in `site/index.html`.
 
-The animated background respects reduced-motion preferences and stops rendering when off-screen or in a hidden tab. React requires JavaScript; a fallback provides direct email and GitHub links when JavaScript is disabled. The 404 page works without JavaScript. All fonts and graphics are served locally.
+The animated background respects reduced-motion preferences and stops rendering when off-screen or in a hidden tab. React requires JavaScript; a fallback provides direct email and GitHub links when JavaScript is disabled. The 404 page works without JavaScript. Fonts and technology logos are served locally; the profile photo loads from LinkedIn with a built-in SVG fallback.
 
-Toolkit logos come from [Devicon](https://github.com/devicons/devicon) and the official [.NET brand repository](https://github.com/dotnet/brand). Original SVGs, attribution and the Devicon license are in `site/public/assets/logos/`. The AWS logo sits on a light background for contrast without recoloring the asset.
+Toolkit logos come from [Devicon](https://github.com/devicons/devicon) and the official [.NET brand repository](https://github.com/dotnet/brand). Original SVGs, attribution and the Devicon license are in `site/public/assets/logos/`. The AWS tile uses Devicon’s orange wordmark on a transparent background.
 
 ## One-time AWS setup
 

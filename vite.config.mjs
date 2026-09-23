@@ -12,6 +12,8 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         main: fileURLToPath(new URL("./site/index.html", import.meta.url)),
+        cv: fileURLToPath(new URL("./site/cv.html", import.meta.url)),
+        resumeRedirect: fileURLToPath(new URL("./site/resume.html", import.meta.url)),
         notFound: fileURLToPath(new URL("./site/404.html", import.meta.url)),
       },
     },

@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "start": "vite",
-    "build": "vite build",
+    "dev": "npm run build:cv && vite",
+    "start": "npm run dev",
+    "build": "npm run build:cv && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "build:cv": "node scripts/build-cv-pdf.mjs"
   },
   "engines": {
     "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
@@ -17,6 +18,7 @@
     "@testing-library/react": "^16.3.3",
     "@vitejs/plugin-react": "^6.1.1",
     "jsdom": "^27.0.1",
+    "pdfkit": "^0.20.2",
     "vite": "^8.3.0",
     "vitest": "^4.1.11"
   },
