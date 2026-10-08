@@ -5,7 +5,9 @@ import CV from "./CV.jsx";
 it("provides a readable CV with experience, contact details and a direct PDF download", () => {
   render(<CV />);
   expect(screen.getByRole("heading", { level: 1 }).textContent).toBe("Jordan Haigh.");
-  expect(screen.getAllByRole("article")).toHaveLength(6);
+  expect(screen.getAllByRole("article")).toHaveLength(5);
+  expect(screen.getByRole("heading", { name: "Financial administration transformation" })).toBeTruthy();
+  expect(screen.getByRole("heading", { name: "Insurance processing automation" })).toBeTruthy();
   expect(screen.getByRole("heading", { name: "Skills & leadership" })).toBeTruthy();
   expect(screen.getByRole("heading", { name: "Education", exact: true })).toBeTruthy();
   expect(screen.getByRole("link", { name: "jordan@jordanhaigh.dev" }).getAttribute("href")).toBe("mailto:jordan@jordanhaigh.dev");
