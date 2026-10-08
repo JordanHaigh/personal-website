@@ -1,32 +1,39 @@
-// Public CV based on the NGM Starter profile. Keep client/employer names
-// and detailed commercial metrics out of these descriptions.
+// Public CV based on the NGM Starter profile. Keep client names and detailed
+// commercial metrics out of these descriptions.
 export const experience = [
   {
-    role: "Technical Lead & Senior Software Developer",
-    context: "Cloud-native transformation · Financial administration",
-    start: "2025-08", end: "2026-09", dates: ["Aug 2025", "Sep 2026"],
-    points: [
-      "Led a small team of senior developers, owning technical design, delivery planning, task decomposition and pull-request reviews.",
-      "Designed a serverless foundation in C# and .NET on AWS, using event messaging, event sourcing and CQRS.",
-      "Improved the system structure and development workflow so engineers could deliver work in parallel.",
-      "Worked directly with client stakeholders through requirements workshops, design approvals and demonstrations.",
+    role: "Senior Software Developer & Technical Lead",
+    company: "Endava",
+    context: "Consulting engagements for external clients",
+    start: "2025-05", end: "present", dates: ["May 2025", "Present"],
+    projects: [
+      {
+        title: "Financial administration transformation",
+        dates: ["Aug 2025", "Sep 2026"],
+        points: [
+          "Led a small team of senior developers, owning technical design, delivery planning, task decomposition and pull-request reviews.",
+          "Designed a serverless foundation in C# and .NET on AWS, using event messaging, event sourcing and CQRS.",
+          "Improved the system structure and development workflow so engineers could deliver work in parallel.",
+          "Worked directly with client stakeholders through requirements workshops, design approvals and demonstrations.",
+        ],
+        technology: "C# · .NET · .NET Aspire · AWS Lambda, S3, RDS, SQS & DynamoDB · Terraform · Open Policy Agent",
+        note: "The programme concluded before production release; production outcomes were not measured.",
+      },
+      {
+        title: "Insurance processing automation",
+        dates: ["May 2025", "Jul 2025"],
+        points: [
+          "Investigated processing failures and data-quality edge cases, improving logging and reducing the need for manual intervention.",
+          "Developed an automated test framework and expanded unit-test coverage for insurance processing workflows.",
+          "Supported development, testing, production releases and post-release support.",
+        ],
+        technology: "C# · .NET · Angular · AWS ECS, S3 & RDS · RabbitMQ · MySQL",
+      },
     ],
-    technology: "C# · .NET · .NET Aspire · AWS Lambda, S3, RDS, SQS & DynamoDB · Terraform · Open Policy Agent",
-    note: "The programme concluded before production release; production outcomes were not measured.",
-  },
-  {
-    role: "Senior Software Developer",
-    context: "Insurance processing automation",
-    start: "2025-05", end: "2025-07", dates: ["May 2025", "Jul 2025"],
-    points: [
-      "Investigated processing failures and data-quality edge cases, improving logging and reducing the need for manual intervention.",
-      "Developed an automated test framework and expanded unit-test coverage for insurance processing workflows.",
-      "Supported development, testing, production releases and post-release support.",
-    ],
-    technology: "C# · .NET · Angular · AWS ECS, S3 & RDS · RabbitMQ · MySQL",
   },
   {
     role: "Full-Stack Software Developer",
+    company: "Consultation Manager",
     context: "Multi-tenant enterprise SaaS",
     start: "2023-04", end: "2025-05", dates: ["Apr 2023", "May 2025"],
     points: [
@@ -39,6 +46,7 @@ export const experience = [
   },
   {
     role: "Software Developer",
+    company: "Cordel",
     context: "Rail & geospatial data platforms",
     start: "2019-12", end: "2023-04", dates: ["Dec 2019", "Apr 2023"],
     points: [
@@ -51,6 +59,7 @@ export const experience = [
   },
   {
     role: "Technical Officer",
+    company: "Cordel",
     context: "Aviation & geospatial technology",
     start: "2018-07", end: "2019-12", dates: ["Jul 2018", "Dec 2019"],
     points: [
@@ -62,6 +71,7 @@ export const experience = [
   },
   {
     role: "Lab Demonstrator",
+    company: "University of Newcastle",
     context: "Higher education · Introduction to Procedural Programming",
     start: "2017-02", end: "2019-02", dates: ["Feb 2017", "Feb 2019"],
     points: [
@@ -126,5 +136,5 @@ export const cv = {
     "institution": "University of Newcastle",
     "dates": "2016–2019"
   },
-  "anonymityNote": "Client and employer names are omitted; roles are described by industry and project."
+  "anonymityNote": "Client names are omitted; roles are described by industry and project."
 };

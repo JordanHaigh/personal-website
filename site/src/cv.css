@@ -39,6 +39,7 @@
 .cv-job-header{display:flex;flex-direction:column-reverse;gap:7px}
 .cv-paper h3{font-size:15px;font-weight:600;line-height:1.6;color:var(--text)}
 .cv-sidebar h3{font-size:13px}
+.cv-job-company{font-size:12px;font-weight:600;margin-top:2px}
 .cv-job-context{font-size:12px;margin-top:4px}
 .cv-section .cv-dates{font-size:10px;letter-spacing:.7px;color:var(--blue)}
 .cv-job ul{padding-left:17px;margin:14px 0 12px}
@@ -46,6 +47,14 @@
 .cv-job li::marker{color:#8c8c9b}
 .cv-section .cv-technology{font-size:10px;line-height:1.9;color:#b4c9f1}
 .cv-job-note{font-size:11px;font-style:italic;margin-top:12px}
+.cv-project+.cv-project{border-top:1px solid #38383f;margin-top:18px;padding-top:14px}
+.cv-project-header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cv-project h4{font-size:13px;font-weight:600;line-height:1.5;color:var(--text)}
+.cv-project-dates{font-size:10px;letter-spacing:.5px;color:var(--blue)}
+.cv-project ul{padding-left:17px;margin:9px 0}
+.cv-project li{padding-left:3px;margin:6px 0}
+.cv-project li::marker{color:#8c8c9b}
+.cv-project .cv-technology{margin-top:8px}
 .cv-education p{margin-top:8px}
 .cv-footer{text-align:center;padding:28px 0 36px;color:var(--muted);font-size:11px}
 @media(max-width:960px){
@@ -83,7 +92,7 @@
   .cv-layout{display:block}
   .cv-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px 26px;background:none;border:0;padding:18px 0}
   .cv-sidebar .cv-section+.cv-section{border:0;margin:0;padding:0}
-  .cv-sidebar .cv-section>p,.cv-skills dd,.cv-job-context{font-size:8pt}
+  .cv-sidebar .cv-section>p,.cv-skills dd,.cv-job-company,.cv-job-context{font-size:8pt}
   .cv-contact{font-size:8pt;gap:4px}
   .cv-skills{gap:7px}
   .cv-skills dt{font-size:8pt;margin-bottom:2px}
@@ -93,6 +102,10 @@
   .cv-section h2,.cv-main .cv-section h2{font-size:10pt;letter-spacing:.5px;margin-bottom:9px;break-after:avoid}
   .cv-paper h3{font-size:10pt}
   .cv-job,.cv-education,.cv-skills>div{break-inside:avoid}
+  .cv-project{break-inside:avoid}
+  .cv-project+.cv-project{border-color:#bbb}
+  .cv-project h4{font-size:9pt}
+  .cv-project-dates{font-size:8pt}
   .cv-job,.cv-job+.cv-job{border:0;margin:0;padding:0 0 18px}
   .cv-job-header{flex-direction:row;justify-content:space-between;align-items:baseline;gap:16px}
   .cv-section .cv-dates{font-size:8pt;white-space:nowrap;letter-spacing:0}

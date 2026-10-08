@@ -55,12 +55,24 @@ export default function CV() {
               {experience.map((job) => (
                 <article className="cv-job" key={job.start}>
                   <header className="cv-job-header">
-                    <div><h3>{job.role}</h3><p className="cv-job-context">{job.context}</p></div>
-                    <p className="cv-dates"><time dateTime={job.start}>{job.dates[0]}</time> – <time dateTime={job.end}>{job.dates[1]}</time></p>
+                    <div><h3>{job.role}</h3><p className="cv-job-company">{job.company}</p><p className="cv-job-context">{job.context}</p></div>
+                    <p className="cv-dates"><time dateTime={job.start}>{job.dates[0]}</time> – {job.end === "present" ? <time>{job.dates[1]}</time> : <time dateTime={job.end}>{job.dates[1]}</time>}</p>
                   </header>
-                  <ul>{job.points.map((point) => <li key={point}>{point}</li>)}</ul>
-                  <p className="cv-technology">{job.technology}</p>
-                  {job.note && <p className="cv-job-note">{job.note}</p>}
+                  {job.projects ? job.projects.map((project) => (
+                    <section className="cv-project" key={project.title}>
+                      <header className="cv-project-header">
+                        <h4>{project.title}</h4>
+                        <p className="cv-project-dates">{project.dates.join(" – ")}</p>
+                      </header>
+                      <ul>{project.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                      <p className="cv-technology">{project.technology}</p>
+                      {project.note && <p className="cv-job-note">{project.note}</p>}
+                    </section>
+                  )) : <>
+                    <ul>{job.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                    <p className="cv-technology">{job.technology}</p>
+                    {job.note && <p className="cv-job-note">{job.note}</p>}
+                  </>}
                 </article>
               ))}
             </section>

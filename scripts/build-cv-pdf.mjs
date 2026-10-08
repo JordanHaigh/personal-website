@@ -83,25 +83,48 @@ newPage();
 heading("Professional experience");
 text(cv.anonymityNote, { size: 8, fill: color.muted, gap: 16 });
 for (const job of experience) {
+  const projectHeight = (project) => measure(project.title, 9.5, "semibold") + 4
+    + measure(project.dates.join(" - "), 8) + 8
+    + project.points.reduce((sum, point) => sum + measure(point, 9, "regular", width - 22) + 6, 0)
+    + measure(project.technology, 8) + 8
+    + (project.note ? measure(project.note, 8) + 8 : 0) + 8;
   const jobHeight = measure(job.role, 11, "semibold") + 6
+    + measure(job.company, 8.5, "semibold") + 5
     + measure(job.context, 8.5) + 5
     + measure(job.dates.join(" - "), 8) + 10
-    + job.points.reduce((sum, point) => sum + measure(point, 9, "regular", width - 14) + 6, 0)
-    + measure(job.technology, 8) + 8
-    + (job.note ? measure(job.note, 8) + 8 : 0) + 16;
+    + (job.projects
+      ? job.projects.reduce((sum, project) => sum + projectHeight(project), 0)
+      : job.points.reduce((sum, point) => sum + measure(point, 9, "regular", width - 14) + 6, 0)
+        + measure(job.technology, 8) + 8
+        + (job.note ? measure(job.note, 8) + 8 : 0)) + 16;
   if (y + jobHeight > bottom) {
     newPage();
     heading("Professional experience / continued");
   }
   text(job.role, { size: 11, font: "semibold", gap: 6 });
+  text(job.company, { size: 8.5, font: "semibold", fill: color.ink, gap: 5 });
   text(job.context, { size: 8.5, fill: color.muted, gap: 5 });
   text(job.dates.join(" - "), { size: 8, fill: color.coral, gap: 10 });
-  for (const point of job.points) {
-    doc.circle(margin + 2, y + 6, 1.3).fill(color.blue);
-    text(point, { x: margin + 14, textWidth: width - 14, gap: 6 });
+  if (job.projects) {
+    for (const project of job.projects) {
+      text(project.title, { size: 9.5, font: "semibold", gap: 4 });
+      text(project.dates.join(" - "), { size: 8, fill: color.coral, gap: 7 });
+      for (const point of project.points) {
+        doc.circle(margin + 9, y + 6, 1.3).fill(color.blue);
+        text(point, { x: margin + 21, textWidth: width - 21, gap: 6 });
+      }
+      text(project.technology, { size: 8, fill: color.blue, gap: 7 });
+      if (project.note) text(project.note, { size: 8, fill: color.muted, gap: 7 });
+      y += 8;
+    }
+  } else {
+    for (const point of job.points) {
+      doc.circle(margin + 2, y + 6, 1.3).fill(color.blue);
+      text(point, { x: margin + 14, textWidth: width - 14, gap: 6 });
+    }
+    text(job.technology, { size: 8, fill: color.blue, gap: 8 });
+    if (job.note) text(job.note, { size: 8, fill: color.muted, gap: 8 });
   }
-  text(job.technology, { size: 8, fill: color.blue, gap: 8 });
-  if (job.note) text(job.note, { size: 8, fill: color.muted, gap: 8 });
   y += 16;
 }
 const { count } = doc.bufferedPageRange();
